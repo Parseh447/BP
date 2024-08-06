@@ -299,7 +299,7 @@ async function vlessOverWSHandler(request) {
 				isDns = true;
 			}
 
-			// ["version", "附加信息长度 N"]
+			// ["version", "é™„åŠ ä¿¡æ¯é•¿åº¦ N"]
 			const vlessResponseHeader = new Uint8Array([vlessVersion[0], 0]);
 			const rawClientData = chunk.slice(rawDataIndex);
 
@@ -840,18 +840,18 @@ const generateRemark = (index, port) => {
     switch (index) {
         case 0:
         case 1:
-            remark = `💦 BPB - Domain_${index + 1} : ${port}`;
+            remark = `ðŸ’¥ ðŸ‡¸ðŸ‡¬ TUNEL - Domain_${index + 1} : ${port}`;
             break;
         case 2:
         case 3:
-            remark = `💦 BPB - IPv4_${index - 1} : ${port}`;
+            remark = `ðŸ’¥ ðŸ‡¸ðŸ‡¬ TUNEL - IPv4_${index - 1} : ${port}`;
             break;
         case 4:
         case 5:
-            remark = `💦 BPB - IPv6_${index - 3} : ${port}`;
+            remark = `ðŸ’¥ ðŸ‡¸ðŸ‡¬ TUNEL - IPv6_${index - 3} : ${port}`;
             break;
         default:
-            remark = `💦 BPB - Clean IP_${index - 5} : ${port}`;
+            remark = `ðŸ’¥ ðŸ‡¸ðŸ‡¬ TUNEL - Clean IP_${index - 5} : ${port}`;
             break;
     }
 
@@ -983,7 +983,7 @@ const buildWorkerLessConfig = async (env, client) => {
     fakeOutbound.tag = 'fake-outbound';
 
     let fragConfig = structuredClone(xrayConfigTemp);
-    fragConfig.remarks  = '💦 BPB Frag - WorkerLess ⭐'
+    fragConfig.remarks  = 'ðŸ’¥ ðŸ‡¸ðŸ‡¬ TUNEL Frag - WorkerLess â­'
     fragConfig.dns = await buildDNSObject(remoteDNS, localDNS, blockAds, bypassIran, blockPorn, true);
     fragConfig.outbounds[0].settings.domainStrategy = 'UseIP';
     fragConfig.outbounds[0].settings.fragment.length = `${lengthMin}-${lengthMax}`;
@@ -1125,7 +1125,7 @@ const getFragmentConfigs = async (env, hostName, client) => {
     };
 
     let bestPing = structuredClone(xrayConfigTemp);
-    bestPing.remarks = '💦 BPB Frag - Best Ping 💥';
+    bestPing.remarks = 'ðŸ’¥ ðŸ‡¸ðŸ‡¬ TUNEL Frag - Best Ping ðŸ’¥';
     bestPing.dns = await buildDNSObject(remoteDNS, localDNS, blockAds, bypassIran, blockPorn);
     bestPing.outbounds[0].settings.fragment.length = `${lengthMin}-${lengthMax}`;
     bestPing.outbounds[0].settings.fragment.interval = `${intervalMin}-${intervalMax}`;
@@ -1146,7 +1146,7 @@ const getFragmentConfigs = async (env, hostName, client) => {
     }
 
     let bestFragment = structuredClone(xrayConfigTemp);
-    bestFragment.remarks = '💦 BPB Frag - Best Fragment 😎';
+    bestFragment.remarks = 'ðŸ’¥ ðŸ‡¸ðŸ‡¬ TUNEL Frag - Best Fragment ðŸ˜Ž';
     bestFragment.dns = await buildDNSObject(remoteDNS, localDNS, blockAds, bypassIran, blockPorn);
     bestFragment.outbounds.splice(0,1);
     bestFragValues.forEach( (fragLength, index) => {
@@ -1275,15 +1275,15 @@ const getWarpConfigs = async (env, client) => {
     const {xray: xrayWarpOutbounds, singbox: singboxWarpOutbounds} = await buildWarpOutbounds(env, remoteDNS, localDNS, blockAds, bypassIran, blockPorn, bypassLAN, warpEndpoints) 
     const {xray: xrayWoWOutbounds, singbox: singboxWoWOutbounds} = await buildWoWOutbounds(env, remoteDNS, localDNS, blockAds, bypassIran, blockPorn, bypassLAN, wowEndpoint); 
     
-    singboxWarpConfig.outbounds[0].outbounds = ['💦 Warp Best Ping 🚀'];
-    singboxWarpConfig.outbounds[1].tag = '💦 Warp Best Ping 🚀';
+    singboxWarpConfig.outbounds[0].outbounds = ['â­ Warp Best Ping ðŸš€'];
+    singboxWarpConfig.outbounds[1].tag = 'â­ Warp Best Ping ðŸš€';
     xrayWarpConfig.dns = await buildDNSObject(remoteDNS, localDNS, blockAds, bypassIran, blockPorn);
     xrayWarpConfig.routing.rules = buildRoutingRules(localDNS, blockAds, bypassIran, blockPorn, bypassLAN, false, false);
     xrayWarpConfig.outbounds.splice(0,1);
     xrayWarpConfig.routing.rules[xrayWarpConfig.routing.rules.length - 1].outboundTag = 'warp';
     delete xrayWarpConfig.observatory;
     delete xrayWarpConfig.routing.balancers;
-    xrayWarpBestPing.remarks = '💦 BPB - Warp Best Ping 🚀'
+    xrayWarpBestPing.remarks = 'ðŸ’¥ ðŸ‡¸ðŸ‡¬ TUNEL - Warp Best Ping ðŸš€'
     xrayWarpBestPing.dns = await buildDNSObject(remoteDNS, localDNS, blockAds, bypassIran, blockPorn);
     xrayWarpBestPing.routing.rules = buildRoutingRules(localDNS, blockAds, bypassIran, blockPorn, bypassLAN, false, true);
     xrayWarpBestPing.outbounds.splice(0,1);
@@ -1298,7 +1298,7 @@ const getWarpConfigs = async (env, client) => {
     xrayWarpOutbounds.forEach((outbound, index) => {
         xrayWarpConfigs.push({
             ...xrayWarpConfig,
-            remarks: `💦 BPB - Warp ${index + 1} 🇮🇷`,
+            remarks: `ðŸ’¥ ðŸ‡¸ðŸ‡¬ TUNEL - Warp ${index + 1} ðŸ‡®ðŸ‡·`,
             outbounds: [{...outbound, tag: 'warp'}, ...xrayWarpConfig.outbounds]
         });
     });
@@ -1306,7 +1306,7 @@ const getWarpConfigs = async (env, client) => {
     xrayWoWOutbounds.forEach((outbound, index) => {
         if (outbound.tag.includes('warp-out')) {
             let xrayWoWConfig = structuredClone(xrayWoWConfigTemp);
-            xrayWoWConfig.remarks = `💦 BPB - WoW ${index/2 + 1} 🌍`;
+            xrayWoWConfig.remarks = `ðŸ’¥ ðŸ‡¸ðŸ‡¬ TUNEL - WoW ${index/2 + 1} ðŸŒ`;
             xrayWoWConfig.outbounds = [{...xrayWoWOutbounds[index]}, {...xrayWoWOutbounds[index + 1]}, ...xrayWoWConfig.outbounds];
             xrayWoWConfig.routing.rules[xrayWoWConfig.routing.rules.length - 1].outboundTag = outbound.tag;
             xrayWarpConfigs.push(xrayWoWConfig);
@@ -1384,7 +1384,7 @@ const buildWarpOutbounds = async (env, remoteDNS, localDNS, blockAds, bypassIran
             ...singboxOutbound,
             server: endpoint.includes('[') ? endpoint.match(ipv6Regex)[1] : endpoint.split(':')[0],
             server_port: endpoint.includes('[') ? +endpoint.match(portRegex)[0] : +endpoint.split(':')[1],
-            tag: `💦 Warp ${index + 1} 🇮🇷`
+            tag: `â­ Warp ${index + 1} ðŸ‡®ðŸ‡·`
         });
     })
     
@@ -1439,7 +1439,7 @@ const buildWoWOutbounds = async (env, remoteDNS, localDNS, blockAds, bypassIran,
             singboxOutbound.peer_public_key = warpConfigs[i].account.config.peers[0].public_key;
             singboxOutbound.reserved = warpConfigs[i].account.config.client_id;
             singboxOutbound.private_key = warpConfigs[i].privateKey;
-            singboxOutbound.tag = i === 1 ? `warp-ir_${index + 1}` : `💦 WoW ${index + 1} 🌍`;    
+            singboxOutbound.tag = i === 1 ? `warp-ir_${index + 1}` : `â­ WoW ${index + 1} ðŸŒ`;    
             
             if (i === 0) {
                 singboxOutbound.detour = `warp-ir_${index + 1}`;
@@ -1793,11 +1793,11 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
             <tr>
                 <td>
                     ${config.address === 'Best-Ping' 
-                        ? `<div  style="justify-content: center;"><span><b>💦 Best-Ping 💥</b></span></div>` 
+                        ? `<div  style="justify-content: center;"><span><b>â­ Best-Ping ðŸ’¥</b></span></div>` 
                         : config.address === 'WorkerLess'
-                            ? `<div  style="justify-content: center;"><span><b>💦 WorkerLess ⭐</b></span></div>`
+                            ? `<div  style="justify-content: center;"><span><b>â­ WorkerLess â­</b></span></div>`
                             : config.address === 'Best-Fragment'
-                                ? `<div  style="justify-content: center;"><span><b>💦 Best-Fragment 😎</b></span></div>`
+                                ? `<div  style="justify-content: center;"><span><b>â­ Best-Fragment ðŸ˜Ž</b></span></div>`
                                 : config.address
                     }
                 </td>
@@ -1836,7 +1836,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BPB Panel ${panelVersion}</title>
+        <title>Control panel ${panelVersion}</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 		<style>
@@ -2053,22 +2053,22 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
 	</head>
 	
 	<body>
-		<h1>BPB Panel <span style="font-size: smaller;">${panelVersion}</span> 💦</h1>
+		<h1>Control panel <span style="font-size: smaller;">${panelVersion}</span> ðŸ’¦</h1>
 		<div class="form-container">
-            <h2>FRAGMENT SETTINGS ⚙️</h2>
+            <h2>FRAGMENT SETTINGS âš™ï¸</h2>
 			<form id="configForm">
 				<div class="form-control">
-					<label for="remoteDNS">🌏 Remote DNS</label>
+					<label for="remoteDNS">ðŸŒ Remote DNS</label>
 					<input type="url" id="remoteDNS" name="remoteDNS" value="${remoteDNS}" required>
 				</div>
 				<div class="form-control">
-					<label for="localDNS">🏚️ Local DNS</label>
+					<label for="localDNS">ðŸšï¸ Local DNS</label>
 					<input type="text" id="localDNS" name="localDNS" value="${localDNS}"
 						pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|localhost$"
 						title="Please enter a valid DNS IP Address or localhost!"  required>
 				</div>	
 				<div class="form-control">
-					<label for="fragmentLengthMin">📐 Length</label>
+					<label for="fragmentLengthMin">ðŸ“ Length</label>
 					<div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: baseline;">
 						<input type="number" id="fragmentLengthMin" name="fragmentLengthMin" value="${lengthMin}" min="10" required>
 						<span style="text-align: center; white-space: pre;"> - </span>
@@ -2076,7 +2076,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
 					</div>
 				</div>
 				<div class="form-control">
-					<label for="fragmentIntervalMin">🕞 Interval</label>
+					<label for="fragmentIntervalMin">ðŸ•ž Interval</label>
 					<div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: baseline;">
 						<input type="number" id="fragmentIntervalMin" name="fragmentIntervalMin"
     						value="${intervalMin}" max="30" required>
@@ -2086,10 +2086,10 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
 					</div>
 				</div>
 				<div class="form-control">
-					<label for="outProxy">✈️ Chain Proxy</label>
+					<label for="outProxy">âœˆï¸ Chain Proxy</label>
 					<input type="text" id="outProxy" name="outProxy" value="${outProxy}">
 				</div>
-                <h2>FRAGMENT ROUTING ⚙️</h2>
+                <h2>FRAGMENT ROUTING âš™ï¸</h2>
 				<div class="form-control" style="margin-bottom: 20px;">			
                     <div class="routing">
                         <input type="checkbox" id="block-ads" name="block-ads" style="margin: 0; grid-column: 2;" value="true" ${blockAds ? 'checked' : ''}>
@@ -2108,18 +2108,18 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
                         <label for="bypass-lan">Bypass LAN</label>
 					</div>
 				</div>
-                <h2>PROXY IP ⚙️</h2>
+                <h2>PROXY IP âš™ï¸</h2>
 				<div class="form-control">
-					<label for="proxyIP">📍 IP or Domain</label>
+					<label for="proxyIP">ðŸ“ IP or Domain</label>
 					<input type="text" id="proxyIP" name="proxyIP" value="${proxyIP}">
 				</div>
-                <h2>CLEAN IP ⚙️</h2>
+                <h2>CLEAN IP âš™ï¸</h2>
 				<div class="form-control">
-					<label for="cleanIPs">✨ Clean IPs</label>
+					<label for="cleanIPs">âœ¨ Clean IPs</label>
 					<input type="text" id="cleanIPs" name="cleanIPs" value="${cleanIPs.replaceAll(",", " , ")}">
 				</div>
                 <div class="form-control">
-                    <label>🔎 Online Scanner</label>
+                    <label>ðŸ”Ž Online Scanner</label>
                     <a href="https://scanner.github1.cloud/" id="scanner" name="scanner" target="_blank">
                         <button type="button" class="button">
                             Scan now
@@ -2127,7 +2127,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
                         </button>
                     </a>
                 </div>
-                <h2>PORTS ⚙️</h2>
+                <h2>PORTS âš™ï¸</h2>
                 <div class="table-container">
                     <table id="frag-sub-table">
                         <tr>
@@ -2144,35 +2144,35 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
                         </tr>`}        
                     </table>
                 </div>
-                <h2>WARP SETTINGS ⚙️</h2>
+                <h2>WARP SETTINGS âš™ï¸</h2>
 				<div class="form-control">
-                    <label for="wowEndpoint">✨ WoW Endpoints</label>
+                    <label for="wowEndpoint">âœ¨ WoW Endpoints</label>
                     <input type="text" id="wowEndpoint" name="wowEndpoint" value="${wowEndpoint.replaceAll(",", " , ")}" required>
 				</div>
 				<div class="form-control">
-                    <label for="warpEndpoints">✨ Warp Endpoints</label>
+                    <label for="warpEndpoints">âœ¨ Warp Endpoints</label>
                     <input type="text" id="warpEndpoints" name="warpEndpoints" value="${warpEndpoints.replaceAll(",", " , ")}" required>
 				</div>
                 <div class="form-control">
-                    <label>🔄 Warp Configs</label>
+                    <label>ðŸ”„ Warp Configs</label>
                     <button id="refreshBtn" type="button" class="button" style="padding: 10px 0;" onclick="getWarpConfigs()">
                         Refresh<span class="material-symbols-outlined">autorenew</span>
                     </button>
                 </div>
                 <div class="form-control">
-                    <label>🔎 Endpoint Scanner</label>
+                    <label>ðŸ”Ž Endpoint Scanner</label>
                     <button type="button" class="button" style="padding: 10px 0;" onclick="copyToClipboard('bash <(curl -fsSL https://raw.githubusercontent.com/Ptechgithub/warp/main/endip/install.sh)', false)">
                         Copy Script<span class="material-symbols-outlined">terminal</span>
                     </button>
                 </div>
 				<div id="apply" class="form-control">
 					<div style="grid-column: 2; width: 100%;">
-						<input type="submit" id="applyButton" class="button disabled" value="APPLY SETTINGS 💥" form="configForm">
+						<input type="submit" id="applyButton" class="button disabled" value="APPLY SETTINGS ðŸ’¥" form="configForm">
 					</div>
 				</div>
 			</form>
             <hr>            
-			<h2>NORMAL CONFIGS 🔗</h2>
+			<h2>NORMAL CONFIGS ðŸ”—</h2>
 			<div class="table-container">
 				<table id="normal-configs-table">
 					<tr>
@@ -2254,7 +2254,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
                     </tr>
 				</table>
 			</div>
-			<h2>FRAGMENT SUB ⛓️</h2>
+			<h2>FRAGMENT SUB â›“ï¸</h2>
 			<div class="table-container">
                 <table id="frag-sub-table">
                     <tr>
@@ -2291,7 +2291,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
                     </tr>
                 </table>
             </div>
-            <h2>WARP SUB 🔗</h2>
+            <h2>WARP SUB ðŸ”—</h2>
 			<div class="table-container">
 				<table id="normal-configs-table">
 					<tr>
@@ -2348,7 +2348,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
 					</tr>
 				</table>
 			</div>
-            <h2>FRAGMENT - NEKORAY ⛓️</h2>
+            <h2>FRAGMENT - NEKORAY â›“ï¸</h2>
             <div class="table-container">
 				<table id="custom-configs-table">
 					<tr style="text-wrap: nowrap;">
@@ -2504,7 +2504,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
             try {
                 document.body.style.cursor = 'wait';
                 const refreshButtonVal = refreshBtn.innerHTML;
-                refreshBtn.innerHTML = '⌛ Loading...';
+                refreshBtn.innerHTML = 'âŒ› Loading...';
 
                 const response = await fetch('/warp-keys', {
                     method: 'POST',
@@ -2518,11 +2518,11 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
                 if (response.ok) {
                     document.body.style.cursor = 'default';
                     refreshBtn.innerHTML = refreshButtonVal;
-                    alert('Warp configs updated successfully! 😎');
+                    alert('Warp configs updated successfully! ðŸ˜Ž');
                 } else {
                     const errorMessage = await response.text();
                     console.error(errorMessage, response.status);
-                    alert('⚠️ An error occured, Please try again!');
+                    alert('âš ï¸ An error occured, Please try again!');
                 }           
             } catch (error) {
                 console.error('Error:', error);
@@ -2542,7 +2542,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
             if (activePortsNo === 0) {
                 event.preventDefault();
                 event.target.checked = !event.target.checked;
-                alert("⛔ At least one port should be selected! 🫤");
+                alert("â›” At least one port should be selected! ðŸ«¤");
                 activePortsNo = 1;
                 defaultHttpsPorts.includes(event.target.name) && activeHttpsPortsNo++;
                 return false;
@@ -2551,7 +2551,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
             if (activeHttpsPortsNo === 0) {
                 event.preventDefault();
                 event.target.checked = !event.target.checked;
-                alert("⛔ At least one TLS(https) port should be selected! 🫤");
+                alert("â›” At least one TLS(https) port should be selected! ðŸ«¤");
                 activeHttpsPortsNo = 1;
                 return false;
             }
@@ -2584,7 +2584,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
 			textarea.select();
 			document.execCommand('copy');
 			document.body.removeChild(textarea);
-			alert('📋 Copied to clipboard:\\n\\n' +  value);
+			alert('ðŸ“‹ Copied to clipboard:\\n\\n' +  value);
 		}
 
         const applySettings = async (event, configForm) => {
@@ -2627,29 +2627,29 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
             });
     
             if (invalidIPs.length) {
-                alert('⛔ Invalid IPs or Domains 🫤\\n\\n' + invalidIPs.map(ip => '⚠️ ' + ip).join('\\n'));
+                alert('â›” Invalid IPs or Domains ðŸ«¤\\n\\n' + invalidIPs.map(ip => 'âš ï¸ ' + ip).join('\\n'));
                 return false;
             }
             
             if (invalidEndpoints.length) {
-                alert('⛔ Invalid endpoint 🫤\\n\\n' + invalidEndpoints.map(endpoint => '⚠️ ' + endpoint).join('\\n'));
+                alert('â›” Invalid endpoint ðŸ«¤\\n\\n' + invalidEndpoints.map(endpoint => 'âš ï¸ ' + endpoint).join('\\n'));
                 return false;
             }
 
             if (lengthMin >= lengthMax || intervalMin > intervalMax) {
-                alert('⛔ Minimum should be smaller or equal to Maximum! 🫤');               
+                alert('â›” Minimum should be smaller or equal to Maximum! ðŸ«¤');               
                 return false;
             }
 
             if (!(isVless && (hasSecurity && validSecurityType || !hasSecurity) && validTransmission) && chainProxy) {
-                alert('⛔ Invalid Config! 🫤 \\n - The chain proxy should be VLESS!\\n - Transmission should be GRPC,WS or TCP\\n - Security should be TLS,Reality or None');               
+                alert('â›” Invalid Config! ðŸ«¤ \\n - The chain proxy should be VLESS!\\n - Transmission should be GRPC,WS or TCP\\n - Security should be TLS,Reality or None');               
                 return false;
             }
 
             try {
                 document.body.style.cursor = 'wait';
                 const applyButtonVal = applyButton.value;
-                applyButton.value = '⌛ Loading...';
+                applyButton.value = 'âŒ› Loading...';
 
                 const response = await fetch('/panel', {
                     method: 'POST',
@@ -2661,12 +2661,12 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
                 applyButton.value = applyButtonVal;
 
                 if (response.ok) {
-                    alert('Parameters applied successfully 😎');
+                    alert('Parameters applied successfully ðŸ˜Ž');
                     window.location.reload(true);
                 } else {
                     const errorMessage = await response.text();
                     console.error(errorMessage, response.status);
-                    alert('⚠️ Session expired! Please login again.');
+                    alert('âš ï¸ Session expired! Please login again.');
                     window.location.href = '/login';
                 }           
             } catch (error) {
@@ -2712,7 +2712,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
             const isLongEnough = newPassword.length >= 8;
 
             if (!(hasCapitalLetter && hasNumber && isLongEnough)) {
-                passwordError.textContent = '⚠️ Password must contain at least one capital letter, one number, and be at least 8 characters long.';
+                passwordError.textContent = 'âš ï¸ Password must contain at least one capital letter, one number, and be at least 8 characters long.';
                 return false;
             }
                     
@@ -2729,17 +2729,17 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
                 if (response.ok) {
                     modal.style.display = "none";
                     document.body.style.overflow = "";
-                    alert("Password changed successfully! 👍");
+                    alert("Password changed successfully! ðŸ‘");
                     window.location.href = '/login';
                 } else if (response.status === 401) {
                     const errorMessage = await response.text();
-                    passwordError.textContent = '⚠️ ' + errorMessage;
+                    passwordError.textContent = 'âš ï¸ ' + errorMessage;
                     console.error(errorMessage, response.status);
-                    alert('⚠️ Session expired! Please login again.');
+                    alert('âš ï¸ Session expired! Please login again.');
                     window.location.href = '/login';
                 } else {
                     const errorMessage = await response.text();
-                    passwordError.textContent = '⚠️ ' + errorMessage;
+                    passwordError.textContent = 'âš ï¸ ' + errorMessage;
                     console.error(errorMessage, response.status);
                     return false;
                 }
@@ -2825,7 +2825,7 @@ const renderLoginPage = async () => {
     </head>
     <body>
         <div class="container">
-            <h1>BPB Panel <span style="font-size: smaller;">${panelVersion}</span> 💦</h1>
+            <h1>Control panel <span style="font-size: smaller;">${panelVersion}</span> ðŸ’¦</h1>
             <div class="form-container">
                 <h2>User Login</h2>
                 <form id="loginForm">
@@ -2855,7 +2855,7 @@ const renderLoginPage = async () => {
                 if (response.ok) {
                     window.location.href = '/panel';
                 } else {
-                    passwordError.textContent = '⚠️ Wrong Password!';
+                    passwordError.textContent = 'âš ï¸ Wrong Password!';
                     const errorMessage = await response.text();
                     console.error('Login failed:', errorMessage);
                 }
@@ -2896,13 +2896,13 @@ const renderErrorPage = (message, error, refer) => {
 
     <body>
         <div id="error-container">
-            <h1>BPB Panel <span style="font-size: smaller;">${panelVersion}</span> 💦</h1>
+            <h1>Control panel <span style="font-size: smaller;">${panelVersion}</span> ðŸ’¦</h1>
             <div id="error-message">
                 <h2>${message} ${refer 
                     ? 'Please try again or refer to <a href="https://github.com/bia-pain-bache/BPB-Worker-Panel/blob/main/README.md">documents</a>' 
                     : ''}
                 </h2>
-                <p><b>${error ? `⚠️ ${error}` : ''}</b></p>
+                <p><b>${error ? `âš ï¸ ${error}` : ''}</b></p>
             </div>
         </div>
     </body>
@@ -3195,11 +3195,11 @@ const singboxConfigTemp = {
         {
             type: "selector",
             tag: "proxy",
-            outbounds: ["💦 Best-Ping 💥"]
+            outbounds: ["â­ Best-Ping ðŸ’¥"]
         },
         {
             type: "urltest",
-            tag: "💦 Best-Ping 💥",
+            tag: "â­ Best-Ping ðŸ’¥",
             outbounds: [],
             url: "https://www.gstatic.com/generate_204",
             interval: "30s",
